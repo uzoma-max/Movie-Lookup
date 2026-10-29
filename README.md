@@ -11,7 +11,7 @@ Search for any movie or TV series and see its poster, IMDb rating, plot, directo
 - Click a result to see full details: rating, runtime, genre, plot, director and cast
 - Smooth animations: drifting hero glow, cards that slide in, hover zoom and loading shimmer
 - Featured movies are cached for a day to save API requests
-- Works on phones and supports dark mode
+- Black, gold and purple theme that works on phones
 
 ## How to run it
 
