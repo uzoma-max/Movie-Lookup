@@ -6,9 +6,11 @@ Search for any movie or TV series and see its poster, IMDb rating, plot, directo
 
 ## Features
 
+- Homepage rows of popular movies and animation favourites, with ratings on each poster
 - Search by title and browse results as poster cards
 - Click a result to see full details: rating, runtime, genre, plot, director and cast
-- Friendly messages for no results or a bad API key
+- Smooth animations: drifting hero glow, cards that slide in, hover zoom and loading shimmer
+- Featured movies are cached for a day to save API requests
 - Works on phones and supports dark mode
 
 ## How to run it
@@ -21,7 +23,7 @@ cd Movie-Lookup
 open index.html   # on Windows: start index.html
 ```
 
-The app comes with a free OMDb API key in `config.js`. To use your own, get one at https://www.omdbapi.com/apikey.aspx and either replace the key in `config.js` or click **Change API key** at the bottom of the page.
+The OMDb API key lives in `config.js`. To use your own, get a free one at https://www.omdbapi.com/apikey.aspx and replace it there.
 
 ## How it works
 

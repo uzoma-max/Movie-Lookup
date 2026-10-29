@@ -7,36 +7,40 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <main>
-    <header>
+  <header class="hero">
+    <div class="hero-glow" aria-hidden="true"></div>
+    <div class="hero-inner">
       <h1>Max-i-movie Lookup</h1>
       <p class="tagline">Search any film or series to see its poster, rating and plot.</p>
-    </header>
 
-    <form id="search-form" role="search">
-      <input id="query" type="search" placeholder="e.g. Inception" autocomplete="off" required>
-      <button type="submit">Search</button>
-    </form>
+      <form id="search-form" role="search">
+        <input id="query" type="search" placeholder="e.g. Inception" autocomplete="off" required>
+        <button type="submit">Search</button>
+      </form>
+    </div>
+  </header>
 
+  <main>
     <p id="message" aria-live="polite"></p>
+
+    <section id="home">
+      <div class="row">
+        <h2>Popular movies</h2>
+        <div class="results" id="popular"></div>
+      </div>
+      <div class="row">
+        <h2>Animation favourites</h2>
+        <div class="results" id="animated"></div>
+      </div>
+    </section>
 
     <section id="results" class="results"></section>
 
     <section id="details" class="details" hidden></section>
-
-    <dialog id="key-dialog">
-      <form method="dialog" id="key-form">
-        <h2>Add your OMDb API key</h2>
-        <p>This app uses the free <a href="https://www.omdbapi.com/apikey.aspx" target="_blank" rel="noopener">OMDb API</a>. Paste your key below. It's saved only in this browser.</p>
-        <input id="key-input" type="text" placeholder="Your API key" required>
-        <button type="submit">Save key</button>
-      </form>
-    </dialog>
   </main>
 
   <footer>
-    Data from <a href="https://www.omdbapi.com/" target="_blank" rel="noopener">OMDb API</a>
-    · <button id="change-key" class="link">Change API key</button>
+    Movie data from <a href="https://www.omdbapi.com/" target="_blank" rel="noopener">OMDb</a>
   </footer>
 
   <script src="config.js"></script>
