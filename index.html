@@ -37,10 +37,20 @@
     <section id="results" class="results"></section>
 
     <section id="details" class="details" hidden></section>
+
+    <dialog id="key-dialog">
+      <form method="dialog" id="key-form">
+        <h2>Add your OMDb API key</h2>
+        <p>This app uses the free <a href="https://www.omdbapi.com/apikey.aspx" target="_blank" rel="noopener">OMDb API</a>. Paste your key below. It's saved only in this browser.</p>
+        <input id="key-input" type="text" placeholder="Your API key" required>
+        <button type="submit">Save key</button>
+      </form>
+    </dialog>
   </main>
 
   <footer>
     Movie data from <a href="https://www.omdbapi.com/" target="_blank" rel="noopener">OMDb</a>
+    · <button id="change-key" class="link">Change API key</button>
   </footer>
 
   <script src="config.js"></script>

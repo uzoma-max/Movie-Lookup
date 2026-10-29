@@ -329,6 +329,42 @@ a {
   color: var(--accent);
 }
 
+dialog {
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  background: var(--surface);
+  color: var(--text);
+  max-width: 420px;
+  width: calc(100% - 32px);
+}
+
+#key-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+#key-form h2 {
+  margin: 0;
+}
+
+#key-form button {
+  padding: 12px 20px;
+  border: none;
+  border-radius: 10px;
+  background: var(--accent);
+  color: #fff;
+  font-weight: 600;
+}
+
+.link {
+  background: none;
+  border: none;
+  color: var(--accent);
+  padding: 0;
+  text-decoration: underline;
+}
+
 footer {
   text-align: center;
   padding: 24px 16px;

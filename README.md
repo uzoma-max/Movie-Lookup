@@ -23,7 +23,7 @@ cd Movie-Lookup
 open index.html   # on Windows: start index.html
 ```
 
-The OMDb API key lives in `config.js`. To use your own, get a free one at https://www.omdbapi.com/apikey.aspx and replace it there.
+The app comes with an OMDb API key in `config.js`. To use your own, get a free one at https://www.omdbapi.com/apikey.aspx and either replace it in `config.js` or click **Change API key** at the bottom of the page.
 
 ## How it works
 

@@ -1,6 +1,7 @@
 const API_URL = "https://www.omdbapi.com/";
 const CACHE_KEY = "featured-movies-v1";
 const CACHE_HOURS = 24;
+const KEY_STORAGE = "omdb-api-key";
 
 // IMDb IDs for the homepage rows.
 const POPULAR = [
@@ -27,13 +28,54 @@ const home = document.getElementById("home");
 const results = document.getElementById("results");
 const details = document.getElementById("details");
 
+const keyDialog = document.getElementById("key-dialog");
+const keyForm = document.getElementById("key-form");
+const keyInput = document.getElementById("key-input");
+
 let lastView = "home";
+let sessionKey = null;
+
+// A key saved in this browser takes priority over the one in config.js.
+function getApiKey() {
+  if (sessionKey) return sessionKey;
+  try {
+    return localStorage.getItem(KEY_STORAGE) || OMDB_API_KEY;
+  } catch {
+    return OMDB_API_KEY;
+  }
+}
+
+function askForKey() {
+  if (keyDialog.open) return;
+  keyInput.value = getApiKey();
+  keyDialog.showModal();
+}
+
+keyForm.addEventListener("submit", () => {
+  sessionKey = keyInput.value.trim();
+  try {
+    localStorage.setItem(KEY_STORAGE, sessionKey);
+  } catch {
+    // Storage blocked: the key only lasts for this visit.
+  }
+  message.textContent = "";
+  loadHome();
+});
+
+document.getElementById("change-key").addEventListener("click", askForKey);
 
 async function callApi(params) {
-  const url = `${API_URL}?${new URLSearchParams({ apikey: OMDB_API_KEY, ...params })}`;
+  const key = getApiKey();
+  if (!key) {
+    askForKey();
+    throw new Error("Add an API key to start searching.");
+  }
+
+  const url = `${API_URL}?${new URLSearchParams({ apikey: key, ...params })}`;
   const response = await fetch(url);
   // OMDb sends a JSON error body (e.g. "Invalid API key!") even on 401s.
   const data = await response.json().catch(() => null);
+  if (response.status === 401) askForKey();
   if (!data) throw new Error("Movie search is unavailable right now. Please try again later.");
   if (data.Response === "False") throw new Error(data.Error);
   return data;
