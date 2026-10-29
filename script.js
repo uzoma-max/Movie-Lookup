@@ -32,8 +32,9 @@ let lastView = "home";
 async function callApi(params) {
   const url = `${API_URL}?${new URLSearchParams({ apikey: OMDB_API_KEY, ...params })}`;
   const response = await fetch(url);
-  if (!response.ok) throw new Error("Movie search is unavailable right now. Please try again later.");
-  const data = await response.json();
+  // OMDb sends a JSON error body (e.g. "Invalid API key!") even on 401s.
+  const data = await response.json().catch(() => null);
+  if (!data) throw new Error("Movie search is unavailable right now. Please try again later.");
   if (data.Response === "False") throw new Error(data.Error);
   return data;
 }
@@ -104,9 +105,13 @@ async function loadHome() {
     const ids = [...POPULAR, ...ANIMATED];
     const settled = await Promise.allSettled(ids.map((id) => callApi({ i: id })));
     movies = {};
+    let firstError = null;
     settled.forEach((result, i) => {
       if (result.status === "fulfilled") movies[ids[i]] = result.value;
+      else firstError ??= result.reason.message;
     });
+    if (firstError) console.warn("Some featured movies failed to load:", firstError);
+    loadHome.lastError = firstError;
     if (Object.keys(movies).length === ids.length) writeCache(movies);
   }
 
@@ -115,7 +120,7 @@ async function loadHome() {
   animatedRow.innerHTML = render(ANIMATED);
 
   if (!popularRow.innerHTML && !animatedRow.innerHTML) {
-    message.textContent = "Couldn't load featured movies. You can still search above.";
+    message.textContent = `Couldn't load featured movies (${loadHome.lastError || "unknown error"}).`;
   }
 }
 
