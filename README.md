@@ -2,7 +2,7 @@
 
 Search for any movie or TV series and see its poster, IMDb rating, plot, director and cast. Built with plain HTML, CSS and JavaScript, using the free [OMDb API](https://www.omdbapi.com/).
 
-**Try it live:** https://uzoma-max.github.io/movie-lookup/
+**Try it live:** https://uzoma-max.github.io/Movie-Lookup/
 
 ## Features
 
@@ -16,8 +16,8 @@ Search for any movie or TV series and see its poster, IMDb rating, plot, directo
 No installation needed. Clone the repo and open `index.html` in your browser:
 
 ```bash
-git clone https://github.com/uzoma-max/movie-lookup.git
-cd movie-lookup
+git clone https://github.com/uzoma-max/Movie-Lookup.git
+cd Movie-Lookup
 open index.html   # on Windows: start index.html
 ```
 
